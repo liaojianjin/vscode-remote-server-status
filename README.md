@@ -83,3 +83,7 @@ npm run compile
 ## 当前限制
 
 - Windows 远程主机未做专门适配（会使用基础 Node 指标，磁盘可能不可用）。
+
+## License
+
+MIT
