@@ -2,7 +2,7 @@
   "name": "vscode-server-status",
   "displayName": "Remote Server Status",
   "description": "Show CPU, memory, and disk usage for SSH remote servers or containers in VS Code.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "local",
   "license": "MIT",
   "engines": {
@@ -194,9 +194,12 @@
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile"
+    "pretest": "npm run compile",
+    "prepackage": "npm run compile",
+    "package": "vsce package --allow-missing-repository"
   },
   "devDependencies": {
+    "@vscode/vsce": "^3.6.0",
     "@types/node": "^20.12.12",
     "@types/vscode": "^1.90.0",
     "typescript": "^5.8.2"

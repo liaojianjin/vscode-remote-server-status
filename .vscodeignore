@@ -1,0 +1,14 @@
+# Source and tooling
+src/**
+.vscode/**
+tsconfig.json
+node_modules/**
+package-lock.json
+
+# VCS and local artifacts
+.git/**
+.gitignore
+*.vsix
+
+# macOS
+.DS_Store
