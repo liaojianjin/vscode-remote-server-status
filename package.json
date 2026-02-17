@@ -1,0 +1,203 @@
+{
+  "name": "vscode-server-status",
+  "displayName": "Remote Server Status",
+  "description": "Show CPU, memory, and disk usage for SSH remote servers or containers in VS Code.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:remoteResourceMonitor.refresh"
+  ],
+  "main": "./out/extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "remoteResourceMonitor.refresh",
+        "title": "Remote Resource Monitor: Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "remoteResourceMonitorView",
+          "name": "Remote Resource Monitor"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Remote Resource Monitor",
+      "properties": {
+        "remoteResourceMonitor.refreshIntervalSeconds": {
+          "type": "number",
+          "default": 5,
+          "minimum": 1,
+          "maximum": 3600,
+          "description": "Metrics refresh interval in seconds."
+        },
+        "remoteResourceMonitor.historyPoints": {
+          "type": "number",
+          "default": 24,
+          "minimum": 5,
+          "maximum": 200,
+          "description": "Number of points used for trend sparklines."
+        },
+        "remoteResourceMonitor.maxDisks": {
+          "type": "number",
+          "default": 6,
+          "minimum": 1,
+          "maximum": 32,
+          "description": "Maximum number of disks to display when diskMountPoints is empty."
+        },
+        "remoteResourceMonitor.diskMountPoints": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Specific mount points to monitor, for example ['/', '/data', '/var/log']."
+        },
+        "remoteResourceMonitor.diskAliases": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Alias mapping for disk labels. Key can be mount point or filesystem device, value is the short name."
+        },
+        "remoteResourceMonitor.diskDisplayMode": {
+          "type": "string",
+          "default": "percent",
+          "enum": [
+            "percent",
+            "remaining",
+            "remainingAndTotal"
+          ],
+          "enumDescriptions": [
+            "Show used percentage only.",
+            "Show remaining space.",
+            "Show remaining space and total size."
+          ],
+          "description": "How disk values are shown in status bar and disk list."
+        },
+        "remoteResourceMonitor.includePseudoFilesystems": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to include pseudo filesystems such as tmpfs/proc/sysfs."
+        },
+        "remoteResourceMonitor.monitorCpu": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to monitor CPU usage."
+        },
+        "remoteResourceMonitor.monitorMemory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to monitor memory usage."
+        },
+        "remoteResourceMonitor.monitorDisk": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to monitor disk usage."
+        },
+        "remoteResourceMonitor.showCpuInStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show CPU usage in the status bar."
+        },
+        "remoteResourceMonitor.showMemoryInStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show memory usage in the status bar."
+        },
+        "remoteResourceMonitor.showDiskInStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show disk usage in the status bar."
+        },
+        "remoteResourceMonitor.cpuWarningPercent": {
+          "type": "number",
+          "default": 75,
+          "minimum": 1,
+          "maximum": 99,
+          "description": "CPU warning threshold percentage."
+        },
+        "remoteResourceMonitor.cpuCriticalPercent": {
+          "type": "number",
+          "default": 90,
+          "minimum": 2,
+          "maximum": 100,
+          "description": "CPU critical threshold percentage."
+        },
+        "remoteResourceMonitor.memoryWarningPercent": {
+          "type": "number",
+          "default": 75,
+          "minimum": 1,
+          "maximum": 99,
+          "description": "Memory warning threshold percentage."
+        },
+        "remoteResourceMonitor.memoryCriticalPercent": {
+          "type": "number",
+          "default": 90,
+          "minimum": 2,
+          "maximum": 100,
+          "description": "Memory critical threshold percentage."
+        },
+        "remoteResourceMonitor.diskWarningPercent": {
+          "type": "number",
+          "default": 80,
+          "minimum": 1,
+          "maximum": 99,
+          "description": "Disk warning threshold percentage (applies to the highest-used mounted disk)."
+        },
+        "remoteResourceMonitor.diskCriticalPercent": {
+          "type": "number",
+          "default": 92,
+          "minimum": 2,
+          "maximum": 100,
+          "description": "Disk critical threshold percentage (applies to the highest-used mounted disk)."
+        },
+        "remoteResourceMonitor.enableNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable VS Code warning/error notifications when thresholds are crossed."
+        },
+        "remoteResourceMonitor.notifyCooldownSeconds": {
+          "type": "number",
+          "default": 120,
+          "minimum": 10,
+          "maximum": 3600,
+          "description": "Cooldown for repeated threshold notifications in seconds."
+        }
+      }
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "remoteResourceMonitor.refresh",
+          "when": "view == remoteResourceMonitorView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.8.2"
+  }
+}
