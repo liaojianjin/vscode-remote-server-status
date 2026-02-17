@@ -2,8 +2,9 @@
   "name": "vscode-server-status",
   "displayName": "Remote Server Status",
   "description": "Show CPU, memory, and disk usage for SSH remote servers or containers in VS Code.",
-  "version": "0.0.2",
-  "publisher": "local",
+  "version": "0.0.3",
+  "publisher": "LiaoJianjin",
+  "author": "LiaoJianjin",
   "license": "MIT",
   "engines": {
     "vscode": "^1.90.0"
