@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Remote system monitor icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1144"/>
+      <stop offset="55%" stop-color="#0c2c6e"/>
+      <stop offset="100%" stop-color="#0a5f9e"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1534"/>
+      <stop offset="100%" stop-color="#091025"/>
+    </linearGradient>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2fffa1"/>
+      <stop offset="50%" stop-color="#40f3ff"/>
+      <stop offset="100%" stop-color="#9bd7ff"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="4" y="4" width="120" height="120" rx="22" fill="url(#bg)"/>
+  <rect x="8" y="8" width="112" height="112" rx="19" fill="none" stroke="#7ee3ff" stroke-opacity="0.35"/>
+
+  <rect x="17" y="20" width="94" height="72" rx="10" fill="url(#panel)" stroke="#7deaff" stroke-opacity="0.45"/>
+  <rect x="17" y="20" width="94" height="10" rx="10" fill="#1d2b66"/>
+  <circle cx="25" cy="25" r="2" fill="#ff6f6f"/>
+  <circle cx="32" cy="25" r="2" fill="#ffd66b"/>
+  <circle cx="39" cy="25" r="2" fill="#5bf58d"/>
+
+  <g fill="none" stroke="url(#neon)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M30 59 L40 50 L30 41"/>
+    <path d="M53 64 H76"/>
+    <path d="M71 52 L78 45 L86 54 L94 40"/>
+    <path d="M71 70 L77 61 L83 66 L90 58 L97 62"/>
+  </g>
+
+  <g fill="none" stroke="#59c8ff" stroke-width="2.4" filter="url(#glow)">
+    <path d="M98 34 q8 6 0 12"/>
+    <path d="M100 30 q14 10 0 20" stroke-opacity="0.8"/>
+    <path d="M102 26 q20 14 0 28" stroke-opacity="0.55"/>
+  </g>
+
+  <g>
+    <rect x="18" y="97" width="92" height="15" rx="7.5" fill="#111a3a" stroke="#74deff" stroke-opacity="0.4"/>
+    <rect x="24" y="102" width="22" height="5" rx="2.5" fill="#30ffb4"/>
+    <rect x="52" y="102" width="18" height="5" rx="2.5" fill="#55e7ff"/>
+    <rect x="76" y="102" width="28" height="5" rx="2.5" fill="#9fd6ff"/>
+  </g>
+</svg>
