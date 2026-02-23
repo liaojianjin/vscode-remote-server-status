@@ -678,8 +678,11 @@ export function activate(context: vscode.ExtensionContext): void {
   statusBar.tooltip = "Remote Resource Monitor";
   statusBar.show();
 
-  const treeDisposable = vscode.window.registerTreeDataProvider(VIEW_ID, treeProvider);
-  context.subscriptions.push(treeDisposable, output, statusBar);
+  const treeView = vscode.window.createTreeView(VIEW_ID, {
+    treeDataProvider: treeProvider,
+    showCollapseAll: false
+  });
+  context.subscriptions.push(treeView, output, statusBar);
   treeProvider.setConfig(config);
 
   const refresh = async (): Promise<void> => {
@@ -706,7 +709,11 @@ export function activate(context: vscode.ExtensionContext): void {
   const refreshCommand = vscode.commands.registerCommand("remoteResourceMonitor.refresh", async () => {
     await refresh();
   });
-  context.subscriptions.push(refreshCommand);
+  const openViewCommand = vscode.commands.registerCommand("remoteResourceMonitor.openView", async () => {
+    await vscode.commands.executeCommand("workbench.view.explorer");
+    await vscode.commands.executeCommand(`${VIEW_ID}.focus`);
+  });
+  context.subscriptions.push(refreshCommand, openViewCommand);
 
   let timer: NodeJS.Timeout | undefined;
   const restartTimer = (): void => {
